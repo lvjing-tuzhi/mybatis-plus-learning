@@ -204,3 +204,44 @@ class MybatisplusStudyApplicationTests {
        System.out.println("是否有上一页：" + userPage.hasPrevious());
    }
    ```
+
+# 8、逻辑删除
+
+1. 在表中和实体类中添加删删除标识符。
+
+2. 在实体类中在删除标识符上添加注解@TableLogic
+
+   ```java
+   //    删除标识符，进行逻辑删除
+       @TableLogic
+       private Integer deleted;
+   ```
+
+3. 当加了这个注解的时候，在调用mybatisplus的删除方法的时候底层是执行更新sql，查询的时候也会自动加入查询条件。
+
+# 9、复杂查询
+
+> 1. 使用QueryWrapper<User> wrapper = new QueryWrapper<>();类里面的方法。
+>
+> 2. 有大于，等于，不等于，模糊，between，指定列，排序等。
+
+1. 使用
+
+   ```java
+       @Test
+       void mulFind() {
+           QueryWrapper<User> wrapper = new QueryWrapper<>();
+   //        大于等于
+   //        wrapper.ge("age",10);
+   //        模糊查询
+   //        wrapper.like("name","锁");
+   //        等于查询
+   //        wrapper.eq("name","aaa");
+   //        排序
+   //        wrapper.orderByAsc("id");
+   //        查询特定字段
+           wrapper.select("name","password");
+   
+           userMapper.selectList(wrapper);
+       }
+   ```

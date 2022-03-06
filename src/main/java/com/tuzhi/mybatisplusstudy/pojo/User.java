@@ -39,6 +39,10 @@ public class User{
     @TableField(fill = FieldFill.INSERT)
     private Integer version;
 
+//    删除标识符，进行逻辑删除
+    @TableLogic
+    private Integer deleted;
+
     public User(String name, String password, String perm) {
         this.name = name;
         this.password = password;
